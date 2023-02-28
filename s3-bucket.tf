@@ -4,9 +4,16 @@ module "s3-bucket" {
 
 
   acl    = "private"
-  bucket_prefix = "${var.prefix}"
+  # bucket_prefix = "${var.prefix}"
+  bucket        = "${var.prefix}-${random_string.s3.result}"
 
   versioning = {
     enabled = true
   }
+}
+
+resource "random_string" "s3" {
+  special = false
+  upper   = false
+  length  = 8
 }
